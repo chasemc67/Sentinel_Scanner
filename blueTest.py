@@ -13,9 +13,9 @@ print("Attempting to find mac: " + targetMac)
 btName = bluetooth.lookup_name(targetMac)
 
 if btName:
-	print("Detected Device: " + btName)
+	print("target mac: " + targetMac + " Named: " + btName)
 else:
-	print("Could not detect device with mac: " + targetMac)
+	print("Could not detect any devices with mac: " + targetMac)
 
 #for A in dir(nearby_devices):
 #	print(str(A)+ "\n")
