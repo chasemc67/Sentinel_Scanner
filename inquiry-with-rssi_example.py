@@ -86,7 +86,7 @@ def device_inquiry_with_with_rssi(sock):
     max_responses = 255
     cmd_pkt = struct.pack("BBBBB", 0x33, 0x8b, 0x9e, duration, max_responses)
     #bluez.hci_send_cmd(sock, bluez.OGF_LINK_CTL, bluez.OCF_INQUIRY, cmd_pkt)
-    bluez.hci_send_cmd(sock, "44:00:10:3F:2A:B8", bluez.OCF_INQUIRY, cmd_pkt)
+    bluez.hci_send_cmd(sock, bluez.OGF_LINK_CTL, "44:00:10:3F:2A:B8", cmd_pkt)
 
     results = []
 
