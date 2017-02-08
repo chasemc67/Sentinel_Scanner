@@ -127,8 +127,7 @@ def device_inquiry_with_with_rssi(sock):
 
     return results
 
-#dev_id = 0
-dev_id = bluez.hci_get_route("44:00:10:3F:2A:B8")
+dev_id = 0
 try:
     sock = bluez.hci_open_dev(dev_id)
 except:
