@@ -38,7 +38,7 @@ def async_inquiry():
 #Parse received advertising packets
 def parse_events(sock):
 # save current filter
-old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
+    old_filter = sock.getsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, 14)
 
 flt = bluez.hci_filter_new()
 bluez.hci_filter_all_events(flt)
