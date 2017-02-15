@@ -4,8 +4,10 @@ import time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 
-while True:
+for i in range(10):
 	GPIO.output(18, True)
 	time.sleep(10)
 	GPIO.output(18, False)
 	time.sleep(10)
+
+exit()
