@@ -15,7 +15,7 @@ class MyDiscoverer(bluetooth.DeviceDiscoverer):
 
     def device_discovered(self, address, device_class, rssi, name):
         discovery_logger.info("Discovered %s" % (address, ))
-        if name == "iphone":
+        #if name == "iphone":
             #Use the RSS for your detection / localization system
 
     def inquiry_complete(self):
