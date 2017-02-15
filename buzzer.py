@@ -15,7 +15,6 @@ def buzz(pitch, duration):
 	delay = period / 2     #calcuate the time for half of the wave
 
 	cycles = int(duration * pitch)   #the number of waves to produce is the duration times the frequency
-
 	for i in range(cycles):    #start a loop from 0 to the variable “cycles” calculated above
 
 	GPIO.output(buzzer_pin, True)   #set pin 18 to high
