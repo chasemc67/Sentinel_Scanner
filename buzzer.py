@@ -8,7 +8,7 @@ GPIO.setmode(GPIO.BCM)#Use the Broadcom method for naming the GPIO pins
 
 GPIO.setup(18, GPIO.OUT)  #Set pin 18 as an output pin
 
-def buzz(pitch, duration):   #create the function “buzz” and feed it the pitch and duration)
+def buzz(pitch, duration):
 
 	period = 1.0 / pitch     #in physics, the period (sec/cyc) is the inverse of the frequency (cyc/sec)
 
