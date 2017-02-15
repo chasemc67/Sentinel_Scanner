@@ -1,6 +1,8 @@
 #https://people.csail.mit.edu/rudolph/Teaching/Articles/BTBook-march.pdf
 # http://stackoverflow.com/questions/22443896/measuring-proximity-with-bluetooth-on-raspberry-pi
 
+#https://www.raspberrypi.org/forums/viewtopic.php?t=47466
+
 import bluetooth
 
 targetMac = "44:00:10:3F:2A:B8"
