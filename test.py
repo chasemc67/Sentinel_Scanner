@@ -15,7 +15,7 @@ from struct import *
 import datetime	
 import pcapy
 import sys
-import scapy as sca
+import scapy.all as sca
  
 def main(argv):
     #list all devices
