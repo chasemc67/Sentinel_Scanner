@@ -15,7 +15,7 @@ from struct import *
 import datetime	
 import pcapy
 import sys
-import scapy
+import scapy as sca
  
 def main(argv):
     #list all devices
@@ -41,18 +41,28 @@ def main(argv):
     #   promiscious mode (1 for true)
     #   timeout (in milliseconds)
     '''
-    cap = pcapy.open_live(dev , 65536 , True , 0)
+
+    #cap = pcapy.open_live(dev , 65536 , True , 0)
+    packets = sca.sniff(iface=dev, count = 100)
+
+    for pkt in packets:
+        parse_packet_sca(pkt)
  
     #start sniffing packets
-    while(1) :
-        (header, packet) = cap.next()
+    #while(1) :
+     #   (header, packet) = cap.next()
         #print ('%s: captured %d bytes, truncated to %d bytes' %(datetime.datetime.now(), header.getlen(), header.getcaplen()))
-        parse_packet(packet)
+      #  parse_packet(packet)
  
 #Convert a string of 6 characters of ethernet address into a dash separated hex string
 def eth_addr (a) :
     b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (ord(a[0]) , ord(a[1]) , ord(a[2]), ord(a[3]), ord(a[4]) , ord(a[5]))
     return b
+
+def parse_packet_sca(packet):
+    print "checking packet"
+    if packet.addr2 is not None:
+        print "packet addr2 not none"
  
 #function to parse a packet
 def parse_packet(packet) :
