@@ -6,13 +6,16 @@ Packet sniffer in python using the pcapy python library
 Project website
 http://oss.coresecurity.com/projects/pcapy.html
 '''
+
+# See this scapy rssi example
+# https://github.com/azz2k/scapy-rssi/blob/master/scapy-rssi.py
  
 import socket
 from struct import *
 import datetime	
 import pcapy
 import sys
-import scapy_ex
+import scapy
  
 def main(argv):
     #list all devices
@@ -60,8 +63,10 @@ def parse_packet(packet) :
     eth_header = packet[:eth_length]
     eth = unpack('!6s6sH' , eth_header)
     eth_protocol = socket.ntohs(eth[2])
-    #print 'Destination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol)
-    packet.show()
+    print 'Destination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol)
+
+    if packet.addr2 is not None:
+        print("Addr2 is not None")
  
     #Parse IP packets, IP Protocol number = 8
     if eth_protocol == 8 :
