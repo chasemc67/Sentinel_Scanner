@@ -16,7 +16,7 @@ import datetime
 import pcapy
 import sys
 import scapy.all as sca
-import struct
+import struct   
  
 def main(argv):
     #list all devices
@@ -44,7 +44,7 @@ def main(argv):
     '''
 
     #cap = pcapy.open_live(dev , 65536 , True , 0)
-    packets = sca.sniff(iface=dev, count = 100)
+    packets = sca.sniff(iface=dev, count = 10)
 
     for pkt in packets:
         parsePacketSca(pkt)
@@ -60,7 +60,7 @@ def eth_addr (a) :
     b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (ord(a[0]) , ord(a[1]) , ord(a[2]), ord(a[3]), ord(a[4]) , ord(a[5]))
     return b
 
-def parsePacketSca(self, pkt):
+def parsePacketSca(pkt):
     if pkt.haslayer(sca.Dot11):
       if pkt.addr2 is not None:
         # check available Radiotap fields
