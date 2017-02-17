@@ -17,6 +17,13 @@ import pcapy
 import sys
 import scapy.all as sca
 import struct   
+
+
+import time
+import thread
+import threading
+import signal
+import sys
  
 def main(argv):
     #list all devices
@@ -44,10 +51,10 @@ def main(argv):
     '''
 
     #cap = pcapy.open_live(dev , 65536 , True , 0)
-    packets = sca.sniff(iface=dev, count = 10)
+    packets = sca.sniff(iface=dev, count = 40)
 
     for pkt in packets:
-        parsePacketSca(pkt)
+        print parsePacketSca(pkt)
  
     #start sniffing packets
     #while(1) :
@@ -61,13 +68,18 @@ def eth_addr (a) :
     return b
 
 def parsePacketSca(pkt):
+    pkt.show()
+    print "Parsing packet"
     if pkt.haslayer(sca.Dot11):
+      print "1"
       if pkt.addr2 is not None:
+        print "2"
         # check available Radiotap fields
         field, val = pkt.getfield_and_val("present")
         names = [field.names[i][0] for i in range(len(field.names)) if (1 << i) & val != 0]
         # check if we measured signal strength
         if "dBm_AntSignal" in names:
+          print "3"
           # decode radiotap header
           fmt = "<"
           rssipos = 0
