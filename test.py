@@ -16,6 +16,7 @@ import datetime
 import pcapy
 import sys
 import scapy.all as sca
+import scapy_ex
 import struct   
 
 
@@ -54,7 +55,8 @@ def main(argv):
     packets = sca.sniff(iface=dev, count = 40)
 
     for pkt in packets:
-        print parsePacketSca(pkt)
+        pkt.show()
+        #print parsePacketSca(pkt)
  
     #start sniffing packets
     #while(1) :
