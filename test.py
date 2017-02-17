@@ -12,6 +12,7 @@ from struct import *
 import datetime	
 import pcapy
 import sys
+import scapy_ex
  
 def main(argv):
     #list all devices
@@ -59,7 +60,8 @@ def parse_packet(packet) :
     eth_header = packet[:eth_length]
     eth = unpack('!6s6sH' , eth_header)
     eth_protocol = socket.ntohs(eth[2])
-    print 'Destination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol)
+    #print 'Destination MAC : ' + eth_addr(packet[0:6]) + ' Source MAC : ' + eth_addr(packet[6:12]) + ' Protocol : ' + str(eth_protocol)
+    packet.show()
  
     #Parse IP packets, IP Protocol number = 8
     if eth_protocol == 8 :
@@ -81,7 +83,8 @@ def parse_packet(packet) :
         s_addr = socket.inet_ntoa(iph[8]);
         d_addr = socket.inet_ntoa(iph[9]);
  
-        print 'Version : ' + str(version) + ' IP Header Length : ' + str(ihl) + ' TTL : ' + str(ttl) + ' Protocol : ' + str(protocol) + ' Source Address : ' + str(s_addr) + ' Destination Address : ' + str(d_addr)
+        #print 'Version : ' + str(version) + ' IP Header Length : ' + str(ihl) + ' TTL : ' + str(ttl) + ' Protocol : ' + str(protocol) + ' Source Address : ' + str(s_addr) + ' Destination Address : ' + str(d_addr)
+
  
         #TCP protocol
         if protocol == 6 :
@@ -98,7 +101,8 @@ def parse_packet(packet) :
             doff_reserved = tcph[4]
             tcph_length = doff_reserved >> 4
              
-            print 'Source Port : ' + str(source_port) + ' Dest Port : ' + str(dest_port) + ' Sequence Number : ' + str(sequence) + ' Acknowledgement : ' + str(acknowledgement) + ' TCP header length : ' + str(tcph_length)
+            #print 'Source Port : ' + str(source_port) + ' Dest Port : ' + str(dest_port) + ' Sequence Number : ' + str(sequence) + ' Acknowledgement : ' + str(acknowledgement) + ' TCP header length : ' + str(tcph_length)
+
              
             h_size = eth_length + iph_length + tcph_length * 4
             data_size = len(packet) - h_size
@@ -106,7 +110,8 @@ def parse_packet(packet) :
             #get data from the packet
             data = packet[h_size:]
              
-            print 'Data : ' + data
+            #print 'Data : ' + data
+
  
         #ICMP Packets
         elif protocol == 1 :
@@ -121,7 +126,8 @@ def parse_packet(packet) :
             code = icmph[1]
             checksum = icmph[2]
              
-            print 'Type : ' + str(icmp_type) + ' Code : ' + str(code) + ' Checksum : ' + str(checksum)
+            #print 'Type : ' + str(icmp_type) + ' Code : ' + str(code) + ' Checksum : ' + str(checksum)
+
              
             h_size = eth_length + iph_length + icmph_length
             data_size = len(packet) - h_size
@@ -129,7 +135,8 @@ def parse_packet(packet) :
             #get data from the packet
             data = packet[h_size:]
              
-            print 'Data : ' + data
+            #print 'Data : ' + data
+
  
         #UDP packets
         elif protocol == 17 :
@@ -145,7 +152,8 @@ def parse_packet(packet) :
             length = udph[2]
             checksum = udph[3]
              
-            print 'Source Port : ' + str(source_port) + ' Dest Port : ' + str(dest_port) + ' Length : ' + str(length) + ' Checksum : ' + str(checksum)
+            #print 'Source Port : ' + str(source_port) + ' Dest Port : ' + str(dest_port) + ' Length : ' + str(length) + ' Checksum : ' + str(checksum)
+
              
             h_size = eth_length + iph_length + udph_length
             data_size = len(packet) - h_size
@@ -153,7 +161,8 @@ def parse_packet(packet) :
             #get data from the packet
             data = packet[h_size:]
              
-            print 'Data : ' + data
+            #print 'Data : ' + data
+
  
         #some other IP packet like IGMP
         else :
