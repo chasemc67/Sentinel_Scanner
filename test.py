@@ -16,6 +16,7 @@ import datetime
 import pcapy
 import sys
 import scapy.all as sca
+import struct
  
 def main(argv):
     #list all devices
@@ -46,7 +47,7 @@ def main(argv):
     packets = sca.sniff(iface=dev, count = 100)
 
     for pkt in packets:
-        parse_packet_sca(pkt)
+        parsePacketSca(pkt)
  
     #start sniffing packets
     #while(1) :
@@ -59,10 +60,29 @@ def eth_addr (a) :
     b = "%.2x:%.2x:%.2x:%.2x:%.2x:%.2x" % (ord(a[0]) , ord(a[1]) , ord(a[2]), ord(a[3]), ord(a[4]) , ord(a[5]))
     return b
 
-def parse_packet_sca(packet):
-    print "checking packet"
-    if packet.addr2 is not None:
-        print "packet addr2 not none"
+def parsePacketSca(self, pkt):
+    if pkt.haslayer(sca.Dot11):
+      if pkt.addr2 is not None:
+        # check available Radiotap fields
+        field, val = pkt.getfield_and_val("present")
+        names = [field.names[i][0] for i in range(len(field.names)) if (1 << i) & val != 0]
+        # check if we measured signal strength
+        if "dBm_AntSignal" in names:
+          # decode radiotap header
+          fmt = "<"
+          rssipos = 0
+          for name in names:
+            # some fields consist of more than one value
+            if name == "dBm_AntSignal":
+              # correct for little endian format sign
+              rssipos = len(fmt)-1
+            fmt = fmt + self.radiotap_formats[name]
+          # unfortunately not all platforms work equally well and on my arm
+          # platform notdecoded was padded with a ton of zeros without
+          # indicating more fields in pkt.len and/or padding in pkt.pad
+          decoded = struct.unpack(fmt, pkt.notdecoded[:struct.calcsize(fmt)])
+          return pkt.addr2, decoded[rssipos]
+    return None, None
  
 #function to parse a packet
 def parse_packet(packet) :
