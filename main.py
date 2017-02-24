@@ -15,7 +15,7 @@ def main():
 	targetBTDistance = -40
 
 
-	#startWifiLoop("mon0", targetWifiMacs, targetWifiDistance)
-	startBtLoop(targetBTMacs, targetBTDistance)
+	startWifiLoop("mon0", targetWifiMacs, targetWifiDistance)
+	#startBtLoop(targetBTMacs, targetBTDistance)
 
 main()
