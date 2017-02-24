@@ -24,9 +24,9 @@ def startWifiLoop(interface, targetList, distance):
         for pkt in packets:
             if pkt.addr2 in targetList:
                 if abs(pkt.dBm_AntSignal) <= abs(distance):
-                    print("[+] " + str(pkt.addr2) + "Seen within range")
+                    print("[+] " + str(pkt.addr2) + " Seen within range")
                 else:
-                    print("[-] " + str(pkt.addr2) + "Seen but not within range")
+                    print("[-] " + str(pkt.addr2) + " Seen but not within range")
  
 if __name__ == "__main__":
   main(sys.argv)
