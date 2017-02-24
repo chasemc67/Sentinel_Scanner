@@ -57,7 +57,7 @@ def main(argv):
 
         for pkt in packets:
             pkt.show()
-            print("Signal Strength: " + str(packet.dBm_AntSignal))
+            print("Signal Strength: " + str(pkt.dBm_AntSignal))
         #print parsePacketSca(pkt)
  
     #start sniffing packets
