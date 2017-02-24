@@ -28,13 +28,17 @@ def startWifiLoop(interface, targetList, distance):
     
     while True:
         packets = sca.sniff(iface=interface, count = 1)
-
         for pkt in packets:
             #pkt.show()
-            print("Mac 1: ") + str(pkt.addr1)
-            print("Mac 2: ") + str(pkt.addr2)
-            print("Mac 3: ") + str(pkt.addr3)
-            print("Signal Strength: " + str(pkt.dBm_AntSignal))
+            # addr2 appears to be the source mac
+            #print("Mac: ") + str(pkt.addr2)
+            #print("Signal Strength: " + str(pkt.dBm_AntSignal))
+
+            if pkt.addr2 in targetList:
+                if abs(pkt.dBm_AntSignal) <= abs(distance):
+                    print("[+] " + str(pkt.addr2) + "Seen within range")
+                else:
+                    print("[-] " + str(pkt.addr2) + "Seen but not within range")
  
 if __name__ == "__main__":
   main(sys.argv)
