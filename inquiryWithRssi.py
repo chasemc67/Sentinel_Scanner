@@ -129,7 +129,7 @@ def device_inquiry_with_with_rssi(sock):
 
     return results
 
-def inquireWithRssi():
+def inquiryWithRssi():
     dev_id = 0
     try:
         sock = bluez.hci_open_dev(dev_id)

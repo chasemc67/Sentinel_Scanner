@@ -7,7 +7,7 @@
 
 import bluetooth
 
-from inquireWithRssi import inquireWithRssi
+from inquiryWithRssi import inquiryWithRssi
 
 def addrFoundWithRssi(addr, results):
 	found = False
