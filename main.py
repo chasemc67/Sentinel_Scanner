@@ -7,7 +7,7 @@
 from wifi import startWifiLoop
 
 def main():
-	targetWifiMacs = ["44:00:10:3F:2A:B7"]
+	targetWifiMacs = ["44:00:10:3f:2a:b7"]
 	targetBTMacs = ["44:00:10:3F:2A:B8"]
 	targetWifiDistance = -40
 	targetBTDistance
