@@ -11,7 +11,7 @@ from inquiryWithRssi import inquiryWithRssi
 
 def addrFoundWithRssi(addr, results):
 	found = False
-	for i in restults:
+	for i in results:
 		if i[0].lower == addr.lower() and i[1] != -1:
 			found = True
 	return found
