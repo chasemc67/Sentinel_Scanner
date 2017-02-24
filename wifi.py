@@ -52,10 +52,12 @@ def main(argv):
     '''
 
     #cap = pcapy.open_live(dev , 65536 , True , 0)
-    packets = sca.sniff(iface=dev, count = 40)
+    while True:
+        packets = sca.sniff(iface=dev, count = 1)
 
-    for pkt in packets:
-        pkt.show()
+        for pkt in packets:
+            pkt.show()
+            print("Signal Strength: " + str(packet.dBm_AntSignal))
         #print parsePacketSca(pkt)
  
     #start sniffing packets
