@@ -24,9 +24,9 @@ def startBtLoop(targetList, distance):
 	for result in results:
 		if result[0].lower() in targetList:
 			if abs(result[1]) <= abs(distance):
-				print("[+] " + result[0] + " seen within range")
+				print("[+] BT " + result[0] + " seen within range")
 			else:
-				print("[-] " + result[0] + " seen but not within range")
+				print("[-] BT " + result[0] + " seen but not within range")
 
 
 	nearby_devices = bluetooth.discover_devices(lookup_names=True)	
@@ -35,6 +35,6 @@ def startBtLoop(targetList, distance):
 			btName = bluetooth.lookup_name(mac)
 
 			if btName:
-				print("[*] " + result[0] + " seen at unknown range")
+				print("[*] BT " + result[0] + " seen at unknown range")
 				
 
