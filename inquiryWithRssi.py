@@ -120,6 +120,7 @@ def device_inquiry_with_with_rssi(sock):
                 results.append( ( addr, -1 ) )
                 #print("[%s] (no RRSI)" % addr)
         else:
+            print()
             #print("unrecognized packet type 0x%02x" % ptype)
         #print("event ", event)
 
