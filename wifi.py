@@ -35,7 +35,7 @@ def main(argv):
     print "Available devices are :"
     for d in devices :
         #print d
-        if d.startswith("wlx"):
+        if d.startswith("mon0"):
             dev = d
      
     #dev = raw_input("Enter device name to sniff : ")
