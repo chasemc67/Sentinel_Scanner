@@ -4,15 +4,16 @@
 # Written by Chase McCarty, January 2017
 
 
-
+from wifi import startWifiLoop
 
 def main():
-	targetWifiMac = ["44:00:10:3F:2A:B7"]
-	targetBTMac = ["44:00:10:3F:2A:B8"]
+	targetWifiMacs = ["44:00:10:3F:2A:B7"]
+	targetBTMacs = ["44:00:10:3F:2A:B8"]
+	targetWifiDistance = -40
+	targetBTDistance
 
 
-
-
+	startWifiLoop("mon0", targetWifiMacs, targetWifiDistance)
 
 
 main()

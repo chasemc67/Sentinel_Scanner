@@ -1,3 +1,7 @@
+# Code taken from
+# https://github.com/ivanlei/airodump-iv/blob/master/airoiv/scapy_ex.py
+# Used to get access to dBm_AntSignal field
+
 """
 A set of additions and modifications to scapy to assist in parsing dot11
 """
