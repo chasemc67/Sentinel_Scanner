@@ -11,7 +11,8 @@ Target macs are hardcoded as lists at the top if main.py for now.
 usage:
 
 $ sudo setup.sh
-$ sudo main.py
+$ sudo python main.py
+
 
 after finished run:
 
@@ -23,7 +24,6 @@ installation requirements:
 BT:
 	sudo apt-get update
 	sudo apt-get install python-pip python-dev ipython
-
 	sudo apt-get install bluetooth libbluetooth-dev
 	sudo pip install pybluez
 
