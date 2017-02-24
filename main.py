@@ -10,7 +10,7 @@ def main():
 	targetWifiMacs = ["44:00:10:3F:2A:B7"]
 	targetBTMacs = ["44:00:10:3F:2A:B8"]
 	targetWifiDistance = -40
-	targetBTDistance
+	targetBTDistance = -40
 
 
 	startWifiLoop("mon0", targetWifiMacs, targetWifiDistance)
