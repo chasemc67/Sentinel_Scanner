@@ -12,7 +12,7 @@ import bluetooth
 def printpacket(pkt):
     for c in pkt:
         sys.stdout.write("%02x " % struct.unpack("B",c)[0])
-    print() 
+    #print() 
 
 
 def read_inquiry_mode(sock):
@@ -120,8 +120,8 @@ def device_inquiry_with_with_rssi(sock):
                 results.append( ( addr, -1 ) )
                 #print("[%s] (no RRSI)" % addr)
         else:
-            print("unrecognized packet type 0x%02x" % ptype)
-        print("event ", event)
+            #print("unrecognized packet type 0x%02x" % ptype)
+        #print("event ", event)
 
 
     # restore old filter
@@ -144,10 +144,10 @@ def inquiryWithRssi():
         print("Are you sure this a bluetooth 1.2 device?")
         print(e)
         sys.exit(1)
-    print("current inquiry mode is %d" % mode)
+    #print("current inquiry mode is %d" % mode)
 
     if mode != 1:
-        print("writing inquiry mode...")
+        #print("writing inquiry mode...")
         try:
             result = write_inquiry_mode(sock, 1)
         except Exception as e:
@@ -156,6 +156,6 @@ def inquiryWithRssi():
             sys.exit(1)
         if result != 0:
             print("error while setting inquiry mode")
-        print("result: %d" % result)
+        #print("result: %d" % result)
 
     return device_inquiry_with_with_rssi(sock)
