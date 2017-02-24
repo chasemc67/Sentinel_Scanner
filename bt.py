@@ -20,7 +20,7 @@ def addrFoundWithRssi(addr, results):
 def startBtLoop(targetList, distance):
 
 	while True:
-		results = inquireWithRssi()
+		results = inquiryWithRssi()
 
 		for result in results:
 			if result[0].lower() in targetList:
