@@ -16,7 +16,7 @@ class WifiThread(threading.Thread):
 		self.stoprequest = threading.Event()
 	 
 	def startWifiLoop(self):
-	    packets = sca.sniff(iface=self.interface, count = 40)
+	    packets = sca.sniff(iface=self.interface, count = 1)
 	    for pkt in packets:
 	        if pkt.addr2 in self.targetList:
 	            if abs(pkt.dBm_AntSignal) <= abs(self.distance):
@@ -24,7 +24,7 @@ class WifiThread(threading.Thread):
 	                self.buzzer = True
 	            else:
 	                #print("[-] Wifi " + str(pkt.addr2) + " Seen but not within range")
-	                self.buzzer = False
+	                #self.buzzer = False
 
 
 	def run(self):
