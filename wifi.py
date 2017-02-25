@@ -5,7 +5,7 @@ import scapy.all as sca
 import scapy_ex
 import threading
 
-class WifiThread(threading.Thread)
+class WifiThread(threading.Thread):
 
 	def __init__(self, interface, targetList, distance, buzzer):
 		super(WifiThread,  self).__init__()
