@@ -44,10 +44,10 @@ class BtThread(threading.Thread):
 		for result in results:
 			if result[0].lower() in self.targetList:
 				if abs(result[1]) <= abs(self.distance):
-					print("[+] BT " + result[0] + " seen within range")
+					#print("[+] BT " + result[0] + " seen within range")
 					self.buzzer = True
 				else:
-					print("[-] BT " + result[0] + " seen but not within range")
+					#print("[-] BT " + result[0] + " seen but not within range")
 					self.buzzer = False
 
 
@@ -57,7 +57,7 @@ class BtThread(threading.Thread):
 				btName = bluetooth.lookup_name(mac)
 
 				if btName:
-					print("[*] BT " + str(mac) + " seen at unknown range")
+					#print("[*] BT " + str(mac) + " seen at unknown range")
 					self.buzzer = True
 					
 

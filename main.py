@@ -10,16 +10,14 @@ from bt import BtThread
 import threading
 
 def printBuzzer(wifiBuzzer, btBuzzer):
-	if wifiBuzzer:
-		print("Wifi is on")
+	if wifiBuzzer and btBuzzer:
+		print("Wifi is on, BT is on")
+	elif wifiBuzzer and not btBuzzer:
+		print("Wifi is on, BT is off")
+	elif not wifiBuzzer and btBuzzer:
+		print("Wifi is off, BT is on")
 	else:
-		print("Wifi is off")
-
-	if btBuzzer:
-		print("BT is on")
-	else:
-		print("BT is off")
-
+		print("Wifi is off, BT is off")
 
 def main():
 	# make sure these are lower case
