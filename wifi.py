@@ -5,7 +5,7 @@ import scapy.all as sca
 import scapy_ex
  
 def startWifiLoop(interface, targetList, distance):
-    packets = sca.sniff(iface=interface, count = 10)
+    packets = sca.sniff(iface=interface, count = 40)
     for pkt in packets:
         if pkt.addr2 in targetList:
             if abs(pkt.dBm_AntSignal) <= abs(distance):
