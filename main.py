@@ -40,12 +40,12 @@ def printBuzzer(wifiQueue, btQueue):
 
 	if buzzWifi == True:
 		print("Wifi is on")
-	elif: buzzWifi == False:
+	elif buzzWifi == False:
 		print("Wifi is off")
 
 	if buzzBt == True:
 		print("Bt is on")
-	elif: buzzBt == False:
+	elif buzzBt == False:
 		print("Bt is off")
 
 	'''
