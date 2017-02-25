@@ -44,5 +44,5 @@ def main():
 try:
 	main()
 except KeyboardInterrupt:
-	for thread in Threads:
+	for thread in threads:
 		thread.kill()
