@@ -14,7 +14,7 @@ import threading
 class BtThread(threading.Thread):
 
 	def __init__(self, targetList, distance, buzzer):
-		super(WifiThread,  self).__init__()
+		super(BtThread,  self).__init__()
 		self.targetList = targetList
 		self.distance = distance
 		self.buzzer = buzzer
