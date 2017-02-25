@@ -38,6 +38,17 @@ def printBuzzer(wifiQueue, btQueue):
 	if buzzBt == "unknown":
 		print("Bt unknown")
 
+	if buzzWifi == True:
+		print("Wifi is on")
+	elif: buzzWifi == False:
+		print("Wifi is off")
+
+	if buzzBt == True:
+		print("Bt is on")
+	elif: buzzBt == False:
+		print("Bt is off")
+
+	'''
 	if buzzWifi == True and buzzBt == True:
 		print("Wifi is on, BT is on")
 	elif buzzWifi == True and buzzBt == False:
@@ -46,6 +57,7 @@ def printBuzzer(wifiQueue, btQueue):
 		print("Wifi is off, BT is on")
 	else:
 		print("Wifi is off, BT is off")
+	'''
 
 
 def main():
