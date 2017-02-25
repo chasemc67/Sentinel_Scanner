@@ -22,7 +22,7 @@ class WifiThread(threading.Thread):
 	            if abs(pkt.dBm_AntSignal) <= abs(self.distance):
 	                #print("[+] Wifi " + str(pkt.addr2) + " Seen within range")
 	                self.buzzer = True
-	            else:
+	            #else:
 	                #print("[-] Wifi " + str(pkt.addr2) + " Seen but not within range")
 	                #self.buzzer = False
 
