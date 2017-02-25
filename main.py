@@ -12,16 +12,20 @@ import Queue
 
 threads = []
 
-def printBuzzer(wifiBuzzer, btBuzzer):
+def printBuzzer(wifiQueue, btQueue):
 
 	buzzWifi = False
 	buzzBt = False
 
-	while(not wifiBuzzer.empty()):
-		buzzWifi = buzzWifi or wifiBuzzer.get()
+	while(not wifiQueue.empty()):
+		wifiTuple = wifiQueue.get()
+		print("seen " + str(wifiTuple)[1])
+		buzzWifi = buzzWifi or wifiTuple[0]
 
-	while(not btBuzzer.empty()):
-		buzzBt = buzzBt or btBuzzer.get()
+	while(not btQueue.empty()):
+		btTuple = btQueue.get()
+		print("seen " + str(btTuple)[1])
+		buzzBt = buzzBt or btTuple[0]
 
 	if buzzWifi == True and buzzBt == True:
 		print("Wifi is on, BT is on")
@@ -40,16 +44,17 @@ def main():
 	targetWifiDistance = -65
 	targetBTDistance = -65
 
-	wifiBuzzing = Queue.Queue()
-	btBuzzing = Queue.Queue()
+	# Queue objects for communicating with threads
+	wifiQueue = Queue.Queue()
+	btQueue = Queue.Queue()
 
-	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
+	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiQueue), BtThread(targetBTMacs, targetBTDistance, btQueue)]
 
 	for thread in threads:
 		thread.start()
 
 	while True:
-		printBuzzer(wifiBuzzing, btBuzzing)
+		printBuzzer(wifiQueue, btQueue)
 		time.sleep(2)
 
 try:

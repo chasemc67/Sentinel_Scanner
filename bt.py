@@ -44,10 +44,10 @@ class BtThread(threading.Thread):
 			if result[0].lower() in self.targetList:
 				if abs(result[1]) <= abs(self.distance):
 					#print("[+] BT " + result[0] + " seen within range")
-					self.buzzer.put(True)
+					self.buzzer.put((True, result[0]))
 				else:
 					#print("[-] BT " + result[0] + " seen but not within range")
-					self.buzzer.put(False)
+					self.buzzer.put((False, result[0]))
 
 
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
@@ -57,6 +57,6 @@ class BtThread(threading.Thread):
 
 				if btName:
 					#print("[*] BT " + str(mac) + " seen at unknown range")
-					self.buzzer.put(True)
+					self.buzzer.put((True, mac))
 					
 
