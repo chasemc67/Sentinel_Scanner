@@ -10,27 +10,14 @@ import threading
 import time
 
 def printBuzzer(wifiBuzzer, btBuzzer):
-	if wifiBuzzer and btBuzzer:
+	if wifiBuzzer == True and btBuzzer == True:
 		print("Wifi is on, BT is on")
-	elif wifiBuzzer and not btBuzzer:
+	elif wifiBuzzer == True and btBuzzer == False:
 		print("Wifi is on, BT is off")
-	elif not wifiBuzzer and btBuzzer:
+	elif wifiBuzzer == False and btBuzzer == True:
 		print("Wifi is off, BT is on")
 	else:
 		print("Wifi is off, BT is off")
-
-def cleanup(threads):
-	print("Cleaning up")
-	for thread in threads:
-		thread.kill()
-	print("Cleaned up")
-
-def __exit__():
-	print("exit function evoked")
-	#print("Cleaning up")
-	for thread in threads:
-		thread.kill()
-	print("Cleaned up")
 
 
 def main():
@@ -41,11 +28,10 @@ def main():
 	targetBTDistance = -65
 
 	wifiBuzzing = False
-	btBuzzing = True
+	btBuzzing = False
 
 	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
 
-	#atexit.register(cleanup)
 	for thread in threads:
 		thread.start()
 
