@@ -27,6 +27,10 @@ def cleanup(threads):
 
 def __exit__():
 	print("exit function evoked")
+	#print("Cleaning up")
+	for thread in threads:
+		thread.kill()
+	print("Cleaned up")
 
 
 def main():
@@ -41,7 +45,7 @@ def main():
 
 	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
 
-	atexit.register(cleanup)
+	#atexit.register(cleanup)
 	for thread in threads:
 		thread.start()
 
