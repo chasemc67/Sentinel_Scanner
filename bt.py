@@ -35,6 +35,6 @@ def startBtLoop(targetList, distance):
 			btName = bluetooth.lookup_name(mac)
 
 			if btName:
-				print("[*] BT " + result[0] + " seen at unknown range")
+				print("[*] BT " + str(mac) + " seen at unknown range")
 				
 
