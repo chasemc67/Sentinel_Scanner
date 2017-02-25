@@ -29,8 +29,7 @@ class WifiThread(threading.Thread):
 
 	def run(self):
 		while not self.stoprequest.isSet():
-			try:
-				self.startWifiLoop()
+			self.startWifiLoop()
 
 	def join(self, timeout=None):
 		self.stoprequest.set()
