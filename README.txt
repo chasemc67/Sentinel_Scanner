@@ -8,6 +8,8 @@ For bluetooth, if device is not in discovery mode, user is notified if device is
 
 Target macs are hardcoded as lists at the top if main.py for now.
 
+Scan time is hardcoded at 5 second intervals right now
+
 usage:
 
 $ sudo setup.sh
