@@ -15,7 +15,9 @@ threads = []
 buzzBt = False
 buzzWifi = False
 
-def printBuzzer(wifiQueue, btQueue):
+def printBuzzer(wifiQueue, btQueue):	
+	global buzzBt
+	global buzzWifi
 
 	if not wifiQueue.empty():
 		buzzWifi = False
