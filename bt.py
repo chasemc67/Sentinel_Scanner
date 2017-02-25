@@ -53,7 +53,7 @@ class BtThread(threading.Thread):
 
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
 		for mac in self.targetList:
-			if not addrFoundWithRssi(mac, results):
+			if not self.addrFoundWithRssi(mac, results):
 				btName = bluetooth.lookup_name(mac)
 
 				if btName:

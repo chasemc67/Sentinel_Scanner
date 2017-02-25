@@ -19,6 +19,16 @@ def printBuzzer(wifiBuzzer, btBuzzer):
 	else:
 		print("Wifi is off, BT is off")
 
+def cleanup(threads):
+	print("Cleaning up")
+	for thread in threads:
+		thread.kill()
+	print("Cleaned up")
+
+def __exit__():
+	print("exit function evoked")
+
+
 def main():
 	# make sure these are lower case
 	targetWifiMacs = ["44:00:10:3f:2a:b7"]
@@ -31,6 +41,7 @@ def main():
 
 	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
 
+	atexit.register(cleanup)
 	for thread in threads:
 		thread.start()
 
