@@ -22,8 +22,7 @@ class BtThread(threading.Thread):
 
 	def run(self):
 		while not self.stoprequest.isSet():
-			while True:
-				self.startBtLoop()
+			self.startBtLoop()
 
 
 	def join(self, timeout=None):
