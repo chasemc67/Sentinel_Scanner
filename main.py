@@ -9,6 +9,8 @@ from bt import BtThread
 import threading
 import time
 
+threads = []
+
 def printBuzzer(wifiBuzzer, btBuzzer):
 	if wifiBuzzer == True and btBuzzer == True:
 		print("Wifi is on, BT is on")
@@ -39,4 +41,8 @@ def main():
 		printBuzzer(wifiBuzzing, btBuzzing)
 		time.sleep(2)
 
-main()
+try:
+	main()
+except KeyboardInterrupt:
+	for thread in Threads:
+		thread.kill()
