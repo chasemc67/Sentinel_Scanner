@@ -19,13 +19,15 @@ class WifiThread(threading.Thread):
 	def startWifiLoop(self):
 	    packets = sca.sniff(iface=self.interface, count = 1)
 	    for pkt in packets:
-	        if pkt.addr2 in self.targetList:
+	        if pkt.addr2.lower() in self.targetList:
 	            if abs(pkt.dBm_AntSignal) <= abs(self.distance):
 	                #print("[+] Wifi " + str(pkt.addr2) + " Seen within range")
 	                self.buzzer.put((True, pkt.addr2))
 	            else:
 	                #print("[-] Wifi " + str(pkt.addr2) + " Seen but not within range")
 	                self.buzzer.put((False, pkt.addr2))
+	        else:
+	        	self.buzzer.put((False, pkt.addr2))
 
 
 	def run(self):
