@@ -4,8 +4,22 @@
 # Written by Chase McCarty, January 2017
 
 
-from wifi import startWifiLoop
-from bt import startBtLoop
+from wifi import WifiThread
+from bt import BtThread
+
+import threading
+
+def printBuzzer(wifiBuzzer, btBuzzer):
+	if wifiBuzzer:
+		print("Wifi is on")
+	else:
+		print("Wifi is off")
+
+	if btBuzzer:
+		print("BT is on")
+	else:
+		print("BT is off")
+
 
 def main():
 	# make sure these are lower case
@@ -14,8 +28,15 @@ def main():
 	targetWifiDistance = -65
 	targetBTDistance = -65
 
+	wifiBuzzing = False
+	btBuzzing = True
+
+	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
+
+	for thread in threads:
+		thread.start()
+
 	while True:
-		startWifiLoop("mon0", targetWifiMacs, targetWifiDistance)
-		startBtLoop(targetBTMacs, targetBTDistance)
+		printBuzzer(wifiBuzzing, btBuzzing)
 
 main()

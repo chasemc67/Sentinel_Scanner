@@ -9,32 +9,56 @@ import bluetooth
 
 from inquiryWithRssi import inquiryWithRssi
 
-def addrFoundWithRssi(addr, results):
-	found = False
-	for i in results:
-		if i[0].lower == addr.lower() and i[1] != -1:
-			found = True
-	return found
+import threading
+
+class BtThread(threading.Thread):
+
+	def __init__(self, targetList, distance, buzzer):
+		super(WifiThread,  self).__init__()
+		self.targetList = targetList
+		self.distance = distance
+		self.buzzer = buzzer
+		self.stoprequest = threading.Event()
+
+	def run(self):
+		while not self.stoprequest.isSet():
+			try:
+				self.startBtLoop()
 
 
-def startBtLoop(targetList, distance):
+	def join(self, timeout=None):
+		self.stoprequest.set()
+		super(BtThread, self).join(timeout)
 
-	results = inquiryWithRssi()
-
-	for result in results:
-		if result[0].lower() in targetList:
-			if abs(result[1]) <= abs(distance):
-				print("[+] BT " + result[0] + " seen within range")
-			else:
-				print("[-] BT " + result[0] + " seen but not within range")
+	def addrFoundWithRssi(self, addr, results):
+		found = False
+		for i in results:
+			if i[0].lower == addr.lower() and i[1] != -1:
+				found = True
+		return found
 
 
-	nearby_devices = bluetooth.discover_devices(lookup_names=True)	
-	for mac in targetList:
-		if not addrFoundWithRssi(mac, results):
-			btName = bluetooth.lookup_name(mac)
+	def startBtLoop(self):
 
-			if btName:
-				print("[*] BT " + str(mac) + " seen at unknown range")
-				
+		results = inquiryWithRssi()
+
+		for result in results:
+			if result[0].lower() in self.targetList:
+				if abs(result[1]) <= abs(self.distance):
+					print("[+] BT " + result[0] + " seen within range")
+					self.buzzer = True
+				else:
+					print("[-] BT " + result[0] + " seen but not within range")
+					self.buzzer = False
+
+
+		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
+		for mac in self.targetList:
+			if not addrFoundWithRssi(mac, results):
+				btName = bluetooth.lookup_name(mac)
+
+				if btName:
+					print("[*] BT " + str(mac) + " seen at unknown range")
+					self.buzzer = True
+					
 
