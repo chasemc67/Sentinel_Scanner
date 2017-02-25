@@ -6,10 +6,9 @@
 # In this case, we still alert the user if we see the device
 
 import bluetooth
-
 from inquiryWithRssi import inquiryWithRssi
-
 import threading
+import Queue
 
 class BtThread(threading.Thread):
 
@@ -45,10 +44,10 @@ class BtThread(threading.Thread):
 			if result[0].lower() in self.targetList:
 				if abs(result[1]) <= abs(self.distance):
 					#print("[+] BT " + result[0] + " seen within range")
-					self.buzzer = True
+					self.buzzer.put(True)
 				else:
 					#print("[-] BT " + result[0] + " seen but not within range")
-					self.buzzer = False
+					self.buzzer.put(False)
 
 
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
@@ -58,6 +57,6 @@ class BtThread(threading.Thread):
 
 				if btName:
 					#print("[*] BT " + str(mac) + " seen at unknown range")
-					self.buzzer = True
+					self.buzzer.put(True)
 					
 

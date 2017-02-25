@@ -8,15 +8,26 @@ from wifi import WifiThread
 from bt import BtThread
 import threading
 import time
+import Queue
 
 threads = []
 
 def printBuzzer(wifiBuzzer, btBuzzer):
-	if wifiBuzzer == True and btBuzzer == True:
+
+	buzzWifi = False
+	buzzBt = False
+
+	while(not wifiBuzzer.empty()):
+		buzzWifi = buzzWifi or wifiBuzzer.get()
+
+	while(not btBuzzer.empty()):
+		buzzBt = buzzBt or btBuzzer.get()
+
+	if buzzWifi == True and buzzBt == True:
 		print("Wifi is on, BT is on")
-	elif wifiBuzzer == True and btBuzzer == False:
+	elif buzzWifi == True and buzzBt == False:
 		print("Wifi is on, BT is off")
-	elif wifiBuzzer == False and btBuzzer == True:
+	elif buzzWifi == False and buzzBt == True:
 		print("Wifi is off, BT is on")
 	else:
 		print("Wifi is off, BT is off")
@@ -29,8 +40,8 @@ def main():
 	targetWifiDistance = -65
 	targetBTDistance = -65
 
-	wifiBuzzing = False
-	btBuzzing = False
+	wifiBuzzing = Queue.Queue()
+	btBuzzing = Queue.Queue()
 
 	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiBuzzing), BtThread(targetBTMacs, targetBTDistance, btBuzzing)]
 
