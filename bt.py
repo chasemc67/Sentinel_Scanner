@@ -51,6 +51,8 @@ class BtThread(threading.Thread):
 				else:
 					#print("[-] BT " + result[0] + " seen but not within range")
 					self.buzzer.put((False, result[0]))
+			else:
+				self.buzzer.put((False, result[0]))
 
 
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
