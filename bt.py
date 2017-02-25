@@ -40,8 +40,11 @@ class BtThread(threading.Thread):
 
 		results = inquiryWithRssi()
 
+		somethingFound = False
+
 		for result in results:
 			if result[0].lower() in self.targetList:
+				somethingFound = True
 				if abs(result[1]) <= abs(self.distance):
 					#print("[+] BT " + result[0] + " seen within range")
 					self.buzzer.put((True, result[0]))
@@ -57,6 +60,11 @@ class BtThread(threading.Thread):
 
 				if btName:
 					#print("[*] BT " + str(mac) + " seen at unknown range")
+					somethingFound = True
 					self.buzzer.put((True, mac))
-					
+
+		if not somethingFound:
+			self.buzzer.put((False, ""))
+		
+
 
