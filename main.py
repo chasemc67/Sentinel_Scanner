@@ -20,6 +20,8 @@ def printBuzzer(wifiQueue, btQueue):
 			wifiTuple = wifiQueue.get()
 			#print("seen Wifi " + str(wifiTuple[1]))
 			buzzWifi = buzzWifi or wifiTuple[0]
+	else:
+		buzzWifi = "unknown"
 
 	if not btQueue.empty():
 		buzzBt = False
@@ -27,7 +29,14 @@ def printBuzzer(wifiQueue, btQueue):
 			btTuple = btQueue.get()
 			#print("seen BT " + str(btTuple[1]))
 			buzzBt = buzzBt or btTuple[0]
+	else:
+		buzzBt = "unknown"
 	
+	if buzzWifi == "unknown":
+		print("Wifi unknown")
+
+	if buzzBt == "unknown":
+		print("Bt unknown")
 
 	if buzzWifi == True and buzzBt == True:
 		print("Wifi is on, BT is on")
