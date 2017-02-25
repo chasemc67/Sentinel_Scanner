@@ -6,8 +6,8 @@
 
 from wifi import WifiThread
 from bt import BtThread
-
 import threading
+import time
 
 def printBuzzer(wifiBuzzer, btBuzzer):
 	if wifiBuzzer and btBuzzer:
@@ -36,5 +36,6 @@ def main():
 
 	while True:
 		printBuzzer(wifiBuzzing, btBuzzing)
+		time.sleep(2)
 
 main()
