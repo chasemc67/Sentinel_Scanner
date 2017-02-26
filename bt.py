@@ -38,18 +38,12 @@ class BtThread(threading.Thread):
 
 	def btLoop(self):
 
-		#self.buzzer.put((False, "00:00:00:00"))
-
+		# Check for nearby BT devices in discovery mode
+		# and get their RSSIs
 		results = inquiryWithRssi()
 
-		#somethingFound = False
-
-		#if len(results) == 0:
-		#	self.buzzer.put((False, "00:00:00:00"))
-
 		for result in results:
-			if result[0].lower() in self.targetList:
-				somethingFound = True
+			if result[0].lower() in self.targetList
 				if abs(result[1]) <= abs(self.distance):
 					#print("[+] BT " + result[0] + " seen within range")
 					self.buzzer.put((True, result[0]))
@@ -59,6 +53,8 @@ class BtThread(threading.Thread):
 			else:
 				self.buzzer.put((False, result[0]))
 
+		# Force check for nearby targets not in discovery mode
+		# Cant get RSSIs
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
 		for mac in self.targetList:
 			if not self.addrFoundWithRssi(mac, results):
@@ -66,13 +62,9 @@ class BtThread(threading.Thread):
 
 				if btName:
 					#print("[*] BT " + str(mac) + " seen at unknown range")
-					somethingFound = True
 					self.buzzer.put((True, mac))
 				else:
 					self.buzzer.put((False, "00:00:00:00"))
-
-		#if not somethingFound:
-		#	self.buzzer.put((False, "00:00:00:00"))
 		
 
 

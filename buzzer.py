@@ -1,3 +1,6 @@
+# Buzzer code 
+# Unused now since we're no longer using the RPI
+
 import RPi.GPIO as GPIO
 import time
 
