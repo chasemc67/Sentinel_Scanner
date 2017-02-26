@@ -69,8 +69,6 @@ class BtThread(threading.Thread):
 					#print("[*] BT " + str(mac) + " seen at unknown range")
 					somethingFound = True
 					self.buzzer.put((True, mac))
-				else:
-					self.buzzer.put(False, "00:00:00:00")
 
 		if not somethingFound:
 			self.buzzer.put((False, "00:00:00:00"))
