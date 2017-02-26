@@ -22,7 +22,7 @@ def main():
 	targetBTMacs = ["44:00:10:3f:2a:b8", "00:1a:7d:da:71:13"]
 	targetWifiDistance = -65
 	targetBTDistance = -65
-	scanTime = 12
+	scanTime = 9
 
 	# Queue objects for communicating with threads
 	wifiQueue = Queue.Queue()
