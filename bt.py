@@ -38,10 +38,10 @@ class BtThread(threading.Thread):
 
 	def startBtLoop(self):
 
-		self.buzzer.put((False, "00:00:00:00"))
+		self.buzzer.put((False, "00:00:00:00"), block=True)
 
-		#results = inquiryWithRssi()
-		results = []
+		results = inquiryWithRssi()
+		#results = []
 
 		somethingFound = False
 
@@ -72,7 +72,7 @@ class BtThread(threading.Thread):
 					self.buzzer.put((True, mac))
 		'''
 		if not somethingFound:
-			self.buzzer.put((False, "00:00:00:00"))
+			self.buzzer.put((False, "00:00:00:00"), block=True)
 		
 
 
