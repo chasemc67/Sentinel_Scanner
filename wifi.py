@@ -17,7 +17,7 @@ class WifiThread(threading.Thread):
 		self.stoprequest = threading.Event()
 	 
 	def wifiLoop(self):
-	    packets = sca.sniff(iface=self.interface, count = 20)
+	    packets = sca.sniff(iface=self.interface, count = 2000, timeout=5)
 	    for pkt in packets:
 	        if pkt.addr2 and pkt.addr2.lower() in self.targetList:
 	            if abs(pkt.dBm_AntSignal) <= abs(self.distance):
