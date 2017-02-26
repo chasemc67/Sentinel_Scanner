@@ -38,7 +38,7 @@ class BtThread(threading.Thread):
 
 	def startBtLoop(self):
 
-		self.buzzer.put((False, "00:00:00:00"))
+		self.buzzer.put((True, "00:00:00:00"))
 
 		results = inquiryWithRssi()
 		#results = []
