@@ -43,7 +43,7 @@ class BtThread(threading.Thread):
 		results = inquiryWithRssi()
 
 		for result in results:
-			if result[0].lower() in self.targetList
+			if result[0].lower() in self.targetList:
 				if abs(result[1]) <= abs(self.distance):
 					#print("[+] BT " + result[0] + " seen within range")
 					self.buzzer.put((True, result[0]))
