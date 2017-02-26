@@ -42,6 +42,9 @@ class BtThread(threading.Thread):
 
 		somethingFound = False
 
+		if len(results) == 0:
+			self.buzzer.put((False, "00:00:00:00"))
+
 		for result in results:
 			if result[0].lower() in self.targetList:
 				somethingFound = True
@@ -66,7 +69,7 @@ class BtThread(threading.Thread):
 					self.buzzer.put((True, mac))
 		'''
 		if not somethingFound:
-			self.buzzer.put((False, ""))
+			self.buzzer.put((False, "00:00:00:00"))
 		
 
 
