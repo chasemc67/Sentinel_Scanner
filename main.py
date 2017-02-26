@@ -15,6 +15,28 @@ threads = []
 buzzBt = False
 buzzWifi = False
 
+
+def main():
+	# make sure these are lower case
+	targetWifiMacs = ["44:00:10:3f:2a:b7"]
+	targetBTMacs = ["44:00:10:3f:2a:b8", "00:1a:7d:da:71:13"]
+	targetWifiDistance = -65
+	targetBTDistance = -65
+	scanTime = 12
+
+	# Queue objects for communicating with threads
+	wifiQueue = Queue.Queue()
+	btQueue = Queue.Queue()
+
+	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiQueue), BtThread(targetBTMacs, targetBTDistance, btQueue)]
+
+	for thread in threads:
+		thread.start()
+
+	while True:
+		printBuzzer(wifiQueue, btQueue)
+		time.sleep(scanTime)
+
 def printBuzzer(wifiQueue, btQueue):	
 	global buzzBt
 	global buzzWifi
@@ -60,28 +82,6 @@ def printBuzzer(wifiQueue, btQueue):
 	else:
 		print("Wifi is off, BT is off")
 	'''
-
-
-def main():
-	# make sure these are lower case
-	targetWifiMacs = ["44:00:10:3f:2a:b7"]
-	targetBTMacs = ["44:00:10:3f:2a:b8", "f4:0f:24:2c:49:f4"]
-	targetWifiDistance = -65
-	targetBTDistance = -65
-	scanTime = 5
-
-	# Queue objects for communicating with threads
-	wifiQueue = Queue.Queue()
-	btQueue = Queue.Queue()
-
-	threads = [WifiThread("mon0", targetWifiMacs, targetWifiDistance, wifiQueue), BtThread(targetBTMacs, targetBTDistance, btQueue)]
-
-	for thread in threads:
-		thread.start()
-
-	while True:
-		printBuzzer(wifiQueue, btQueue)
-		time.sleep(scanTime)
 
 try:
 	main()
