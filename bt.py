@@ -41,7 +41,6 @@ class BtThread(threading.Thread):
 		self.buzzer.put((False, "00:00:00:00"))
 
 		results = inquiryWithRssi()
-		#results = []
 
 		somethingFound = False
 
