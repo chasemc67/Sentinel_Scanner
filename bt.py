@@ -21,7 +21,7 @@ class BtThread(threading.Thread):
 
 	def run(self):
 		while not self.stoprequest.isSet():
-			self.startBtLoop()
+			self.btLoop()
 
 
 	def join(self, timeout=None):
@@ -36,16 +36,16 @@ class BtThread(threading.Thread):
 		return found
 
 
-	def startBtLoop(self):
+	def btLoop(self):
 
-		self.buzzer.put((False, "00:00:00:00"))
+		#self.buzzer.put((False, "00:00:00:00"))
 
 		results = inquiryWithRssi()
 
-		somethingFound = False
+		#somethingFound = False
 
-		if len(results) == 0:
-			self.buzzer.put((False, "00:00:00:00"))
+		#if len(results) == 0:
+		#	self.buzzer.put((False, "00:00:00:00"))
 
 		for result in results:
 			if result[0].lower() in self.targetList:
@@ -71,8 +71,8 @@ class BtThread(threading.Thread):
 				else:
 					self.buzzer.put((False, "00:00:00:00"))
 
-		if not somethingFound:
-			self.buzzer.put((False, "00:00:00:00"))
+		#if not somethingFound:
+		#	self.buzzer.put((False, "00:00:00:00"))
 		
 
 

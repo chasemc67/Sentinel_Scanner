@@ -12,18 +12,23 @@ import Queue
 
 threads = []
 
+
+# Enter Mac addresses and stuff here
+#######################################
+# make sure these are lower case
+targetWifiMacs = ["44:00:10:3f:2a:b7"]
+targetBTMacs = ["44:00:10:3f:2a:b8", "00:1a:7d:da:71:13"]
+targetWifiDistance = -65
+targetBTDistance = -65
+scanTime = 9
+#######################################
+
+
+# globals to act as static vars
 buzzBt = False
 buzzWifi = False
 
-
 def main():
-	# make sure these are lower case
-	targetWifiMacs = ["44:00:10:3f:2a:b7"]
-	targetBTMacs = ["44:00:10:3f:2a:b8", "00:1a:7d:da:71:13"]
-	targetWifiDistance = -65
-	targetBTDistance = -65
-	scanTime = 9
-
 	# Queue objects for communicating with threads
 	wifiQueue = Queue.Queue()
 	btQueue = Queue.Queue()
@@ -42,24 +47,24 @@ def printBuzzer(wifiQueue, btQueue):
 	global buzzWifi
 
 	if not wifiQueue.empty():
-		print("Wifi Queue not empty")
+		#print("Wifi Queue not empty")
 		buzzWifi = False
 		while(not wifiQueue.empty()):
 			wifiTuple = wifiQueue.get()
 			#print("seen Wifi " + str(wifiTuple[1]))
 			buzzWifi = buzzWifi or wifiTuple[0]
 	else:
-		print("Wifi Queue empty")
+		#print("Wifi Queue empty")
 
 	if not btQueue.empty():
-		print("BT Queue not empty")
+		#print("BT Queue not empty")
 		buzzBt = False
 		while(not btQueue.empty()):
 			btTuple = btQueue.get()
 			#print("seen BT " + str(btTuple[1]))
 			buzzBt = buzzBt or btTuple[0]
 	else:
-		print("BT Queue empty")
+		#print("BT Queue empty")
 
 	print("")
 
@@ -74,17 +79,6 @@ def printBuzzer(wifiQueue, btQueue):
 		print("Bt is off")
 
 	print("")
-
-	'''
-	if buzzWifi == True and buzzBt == True:
-		print("Wifi is on, BT is on")
-	elif buzzWifi == True and buzzBt == False:
-		print("Wifi is on, BT is off")
-	elif buzzWifi == False and buzzBt == True:
-		print("Wifi is off, BT is on")
-	else:
-		print("Wifi is off, BT is off")
-	'''
 
 try:
 	main()

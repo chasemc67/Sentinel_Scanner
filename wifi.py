@@ -16,7 +16,7 @@ class WifiThread(threading.Thread):
 		self.buzzer = buzzer
 		self.stoprequest = threading.Event()
 	 
-	def startWifiLoop(self):
+	def wifiLoop(self):
 	    packets = sca.sniff(iface=self.interface, count = 10)
 	    for pkt in packets:
 	        if pkt.addr2 and pkt.addr2.lower() in self.targetList:
@@ -32,7 +32,7 @@ class WifiThread(threading.Thread):
 
 	def run(self):
 		while not self.stoprequest.isSet():
-			self.startWifiLoop()
+			self.wifiLoop()
 
 	def join(self, timeout=None):
 		self.stoprequest.set()
