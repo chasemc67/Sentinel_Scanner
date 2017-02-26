@@ -40,8 +40,8 @@ class BtThread(threading.Thread):
 
 		self.buzzer.put((False, "00:00:00:00"))
 
-		#results = inquiryWithRssi()
-		results = []
+		results = inquiryWithRssi()
+		#results = []
 
 		somethingFound = False
 
@@ -60,7 +60,6 @@ class BtThread(threading.Thread):
 			else:
 				self.buzzer.put((False, result[0]))
 
-		'''
 		nearby_devices = bluetooth.discover_devices(lookup_names=True)	
 		for mac in self.targetList:
 			if not self.addrFoundWithRssi(mac, results):
@@ -70,7 +69,7 @@ class BtThread(threading.Thread):
 					#print("[*] BT " + str(mac) + " seen at unknown range")
 					somethingFound = True
 					self.buzzer.put((True, mac))
-		'''
+
 		if not somethingFound:
 			self.buzzer.put((False, "00:00:00:00"))
 		
