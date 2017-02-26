@@ -42,11 +42,14 @@ def printBuzzer(wifiQueue, btQueue):
 	global buzzWifi
 
 	if not wifiQueue.empty():
+		print("Wifi Queue not empty")
 		buzzWifi = False
 		while(not wifiQueue.empty()):
 			wifiTuple = wifiQueue.get()
 			#print("seen Wifi " + str(wifiTuple[1]))
 			buzzWifi = (buzzWifi or wifiTuple[0])
+	else:
+		print("Wifi Queue empty")
 
 	if not btQueue.empty():
 		print("BT Queue not empty")
