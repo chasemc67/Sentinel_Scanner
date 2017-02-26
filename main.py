@@ -46,7 +46,7 @@ def printBuzzer(wifiQueue, btQueue):
 		while(not wifiQueue.empty()):
 			wifiTuple = wifiQueue.get()
 			#print("seen Wifi " + str(wifiTuple[1]))
-			buzzWifi = buzzWifi or wifiTuple[0]
+			buzzWifi = (buzzWifi or wifiTuple[0])
 
 	if not btQueue.empty():
 		print("BT Queue not empty")
@@ -54,7 +54,7 @@ def printBuzzer(wifiQueue, btQueue):
 		while(not btQueue.empty()):
 			btTuple = btQueue.get()
 			#print("seen BT " + str(btTuple[1]))
-			buzzBt = buzzBt or btTuple[0]
+			buzzBt = (buzzBt or (btTuple[0] == "True"))
 	else:
 		print("BT Queue empty")
 
