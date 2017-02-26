@@ -34,12 +34,6 @@ def printBuzzer(wifiQueue, btQueue):
 			buzzBt = buzzBt or btTuple[0]
 
 	print("")
-	
-	if buzzWifi == "unknown":
-		print("Wifi unknown")
-
-	if buzzBt == "unknown":
-		print("Bt unknown")
 
 	if buzzWifi == True:
 		print("Wifi is on")
