@@ -17,7 +17,7 @@ sudo setup.sh
 sudo python main.py
 ```
 
-after finished run:
+#### Teardown:
 ```
 sudo teardown.sh
 ```
