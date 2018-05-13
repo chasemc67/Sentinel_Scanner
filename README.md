@@ -25,15 +25,15 @@ sudo teardown.sh
 #### Installation Requirements:
 
 ##### BT:
-	```
-	sudo apt-get update
-	sudo apt-get install python-pip python-dev ipython
-	sudo apt-get install bluetooth libbluetooth-dev
-	sudo pip install pybluez
-	```
+```
+sudo apt-get update
+sudo apt-get install python-pip python-dev ipython
+sudo apt-get install bluetooth libbluetooth-dev
+sudo pip install pybluez
+```
 
 ##### WiFi:
-	```
-	sudo apt-get install aircrack-ng
-	sudo apt-get install scapy
-	```
+```
+sudo apt-get install aircrack-ng
+sudo apt-get install scapy
+```
